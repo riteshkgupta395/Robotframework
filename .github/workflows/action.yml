@@ -3,10 +3,6 @@ name: Robot Framework
 on:
   push:
     branches: [ master ]
-- name: Create directory
-  run: sudo mkdir ${{ github.workspace }}/test
-- name: Create reports directory
-  run: sudo mkdir ${{ github.workspace }}/reports   
 
 jobs:
     test:
@@ -17,9 +13,12 @@ jobs:
           uses: joonvena/robotframework-docker-action@v0.1
           env:
             BROWSER: chrome
+            name: Create directory
+            run: sudo mkdir ${{ github.workspace }}/test
             ROBOT_TESTS_DIR: ${{ github.workspace }}/robotframework
+             run: sudo mkdir ${{ github.workspace }}/reports  
             ROBOT_REPORTS_DIR: ${{ github.workspace }}/reports
-        - name: Upload test results
+            name: Upload test results
           uses: actions/upload-artifact@v1
           if: always()
           with:

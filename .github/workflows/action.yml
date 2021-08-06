@@ -19,8 +19,8 @@ jobs:
           env:
             BROWSER: chrome
             
-            name: Upload test results
-            uses: actions/upload-artifact@v1
+        - name: Upload test results
+          uses: actions/upload-artifact@v1
           if: always()
           with:
             name: reports
@@ -28,7 +28,7 @@ jobs:
    
     generate_report:
         if: always()
-        needs: [test]
+        needs: test
         runs-on: ubuntu-latest
         steps:
         - name: Download reports
